@@ -4,19 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>wisperChad: talk your type</title>
-  <meta name="description" content="Free, private voice dictation for Windows. Hold a hotkey, talk, and clean text appears wherever you type. It can draft your replies too. Everything runs on your own PC." />
+  <meta name="description" content="Free, private voice dictation for Windows and Mac. Hold a hotkey, talk, and clean text appears wherever you type. It can draft your replies too. Everything runs on your own computer." />
   <meta property="og:title" content="wisperChad: talk your type" />
-  <meta property="og:description" content="Free, private voice dictation for Windows that runs entirely on your own PC." />
+  <meta property="og:description" content="Free, private voice dictation for Windows and Mac that runs entirely on your own computer." />
   <meta property="og:image" content="https://currymunchy.github.io/wisperchad-app/linkedin-banner-white.png" />
   <link rel="icon" href="logo-black.png" />
   <style>
     :root {
       --bg: #fffefd; --soft: #f5f3f0; --text: #1a1a1a; --muted: #6f6b67; --border: #e5e2de;
-      --accent: #994ea8; --accent-soft: #f5ecf7;
+      --accent: #994ea8; --accent-soft: #f5ecf7; --ink: #111116; --window: #ffffff;
       --serif: Georgia, "Times New Roman", serif; --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
     @media (prefers-color-scheme: dark) {
-      :root { --bg: #1a1a1a; --soft: #232323; --text: #fffefd; --muted: #a8a4a0; --border: #383838; --accent: #cf9adb; --accent-soft: #33243a; }
+      :root { --bg: #1a1a1a; --soft: #232323; --text: #fffefd; --muted: #a8a4a0; --border: #383838; --accent: #cf9adb; --accent-soft: #33243a; --window: #222222; }
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -35,7 +35,7 @@
     h3 { font-size: 17px; margin: 0 0 6px; }
     .lead { color: var(--muted); font-size: 20px; max-width: 620px; margin: 0 auto 30px; }
     .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn { display: inline-block; padding: 14px 26px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--text); color: var(--text); }
+    .btn { display: inline-block; padding: 14px 26px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--text); color: var(--text); background: none; font-size: 16px; cursor: pointer; }
     .btn.primary { background: var(--text); color: var(--bg); }
     .btn:hover { opacity: 0.85; }
     .small { font-size: 14px; color: var(--muted); }
@@ -43,53 +43,177 @@
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 28px; }
     .card { border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; }
     .card p { margin: 0; color: var(--muted); }
-    kbd { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 10px; font: 600 14px var(--sans); }
-    ol.steps { padding-left: 22px; margin: 20px 0 0; }
-    ol.steps li { margin-bottom: 10px; }
+    kbd { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 10px; font: 600 14px var(--sans); white-space: nowrap; }
+    ol.steps { padding-left: 22px; margin: 14px 0 0; }
+    ol.steps li { margin-bottom: 8px; }
     .support { background: var(--soft); border-radius: 20px; padding: 36px; text-align: center; }
     .support p { color: var(--muted); max-width: 560px; margin: 0 auto 22px; }
     .fine p { color: var(--muted); }
+    code { font: 13px/1.5 ui-monospace, Consolas, monospace; background: var(--soft); padding: 2px 6px; border-radius: 6px; overflow-wrap: anywhere; }
     footer { padding: 36px 0 56px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
-    @media (max-width: 600px) { h1 { font-size: 46px; } nav { display: none; } .hero { padding-top: 28px; } .hero img { width: 120px; height: 120px; } }
+
+    /* The talking band: the logo's waves, across the page. Purple while they talk, white as they settle. */
+    .band { background: var(--ink); color: #fffefd; text-align: center; padding: 72px 24px 64px; overflow: hidden; }
+    .waves { display: flex; align-items: center; justify-content: center; gap: 7px; height: 170px; }
+    .waves span { width: 9px; border-radius: 9px; background: #fff; height: 20px; }
+    .band p { font: 400 30px/1.2 var(--serif); margin: 34px 0 0; letter-spacing: -0.01em; }
+    .band .small { color: #a8a4a0; margin-top: 8px; font-family: var(--sans); font-size: 15px; }
+
+    /* Examples */
+    .demo { display: grid; grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr); align-items: center; gap: 10px; margin-top: 30px; }
+    .arrow { text-align: center; font-size: 26px; color: var(--accent); }
+    .label { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .said { border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; }
+    .said q { display: block; font: italic 19px/1.5 var(--serif); color: var(--text); quotes: "\201C" "\201D"; }
+    .pill { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fffefd; border-radius: 999px; padding: 8px 16px; font-size: 14px; margin-bottom: 14px; }
+    .pill .mini { display: flex; align-items: center; gap: 3px; height: 16px; }
+    .pill .mini i { width: 3px; height: 6px; border-radius: 3px; background: #994ea8; }
+    .listening .pill .mini i { animation: talk 0.9s ease-in-out infinite; }
+    .pill .mini i:nth-child(2) { animation-delay: -0.3s; } .pill .mini i:nth-child(3) { animation-delay: -0.6s; }
+    .pill .mini i:nth-child(4) { animation-delay: -0.15s; } .pill .mini i:nth-child(5) { animation-delay: -0.45s; }
+    @keyframes talk { 0%, 100% { height: 5px; } 50% { height: 16px; } }
+    .window { border: 1px solid var(--border); border-radius: 14px; background: var(--window); overflow: hidden; }
+    .window .bar { display: flex; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+    .window .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+    .window .body { padding: 16px 18px; }
+    .mail-head { font-size: 14px; color: var(--muted); }
+    .mail-head b { color: var(--text); }
+    .mail-text { margin: 10px 0 0; font-size: 15px; }
+    .typed { min-height: 120px; white-space: pre-wrap; font-size: 15px; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-top: 12px; }
+    .typed:empty::before { content: attr(data-placeholder); color: var(--muted); }
+    .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--accent); vertical-align: -3px; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .replay { margin-top: 18px; }
+
+    @media (max-width: 760px) {
+      .demo { grid-template-columns: minmax(0, 1fr); }
+      .arrow { transform: rotate(90deg); }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 46px; } h2 { font-size: 32px; } nav { display: none; }
+      .hero { padding-top: 28px; } .hero img { width: 120px; height: 120px; }
+      .waves { gap: 5px; height: 130px; } .waves span { width: 6px; }
+      .band p { font-size: 24px; }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <a class="brand" href="#"><img src="logo-black.png" alt="" />wisperChad</a>
-      <nav><a href="#features">Features</a><a href="#download">Download</a><a href="#support">Support</a><a href="#privacy">Privacy</a></nav>
+      <nav><a href="#examples">Examples</a><a href="#features">Features</a><a href="#download">Download</a><a href="#support">Support</a></nav>
     </header>
 
     <div class="hero">
       <img src="logo-animated.svg" alt="The wisperChad logo: a cat with sound waves" />
       <h1>Talk your type.</h1>
-      <p class="lead">Free, private voice dictation for Windows. Hold a hotkey, talk, and clean text appears wherever you type. It can even write your replies. Everything runs on your own PC.</p>
+      <p class="lead">Free, private voice dictation for Windows and Mac. Hold a hotkey, talk, and clean text appears wherever you type. It can even write your replies. Everything runs on your own computer.</p>
       <div class="buttons">
-        <a class="btn primary" href="https://github.com/currymunchy/wisperchad-app/releases/latest">Download for Windows</a>
-        <a class="btn" href="#support">Support wisperChad</a>
+        <a class="btn primary" id="get-windows" href="#download-windows">Download for Windows</a>
+        <a class="btn" id="get-mac" href="#download-mac">Download for Mac</a>
       </div>
-      <p class="small">Free. No account, no subscription, no cloud. Windows 10 and 11.</p>
+      <p class="small">Free. No account, no subscription, no cloud.</p>
     </div>
+  </div>
+
+  <div class="band" id="band" aria-hidden="true">
+    <div class="waves" id="waves"></div>
+    <p>Just talk. wisperChad listens.</p>
+    <div class="small">Speech and writing models run on your computer. Nothing leaves it.</div>
+  </div>
+
+  <div class="wrap">
+    <section id="examples" style="border-top: 0">
+      <h2>See it in action</h2>
+      <p class="fine" style="color: var(--muted)">Two examples of what you say, and what wisperChad types for you.</p>
+
+      <div class="demo-block" data-demo="dictate">
+        <h3 style="margin-top: 34px">Dictation: say it messy, get it clean</h3>
+        <div class="demo">
+          <div class="said">
+            <div class="label">You say</div>
+            <div class="pill"><span class="mini"><i></i><i></i><i></i><i></i><i></i></span>Listening…</div>
+            <q>um so I was thinking we could uh meet on tuesday at like 3pm and go through the slides together</q>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div>
+            <div class="label">wisperChad types</div>
+            <div class="window">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="body">
+                <div class="mail-head"><b>Message to Daniel</b></div>
+                <div class="typed" data-placeholder="Type a message"
+                  data-text="I was thinking we could meet on Tuesday at 3 pm and go through the slides together."></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block" data-demo="reply">
+        <h3 style="margin-top: 44px">Replies: say the gist, get a polished email</h3>
+        <div class="window" style="margin-top: 16px">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="body">
+            <div class="mail-head"><b>Sarah Lim</b> · Team lunch on Friday?</div>
+            <p class="mail-text">Hi! We're planning a team lunch this Friday at 12:30. Can you make it? Also, do you have any food allergies?<br />Thanks,<br />Sarah</p>
+          </div>
+        </div>
+        <div class="demo">
+          <div class="said">
+            <div class="label">You say</div>
+            <div class="pill"><span class="mini"><i></i><i></i><i></i><i></i><i></i></span>Writing a reply…</div>
+            <q>yeah I can come, no allergies</q>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div>
+            <div class="label">wisperChad writes</div>
+            <div class="window">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="body">
+                <div class="mail-head"><b>Reply to Sarah Lim</b></div>
+                <div class="typed" data-placeholder="Reply"
+                  data-text="Hi Sarah,&#10;&#10;Yes, I can make it to the team lunch on Friday at 12:30. I don't have any food allergies.&#10;&#10;Best regards,&#10;Alex"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn replay" id="replay">Play the examples again</button>
+    </section>
 
     <section id="features">
       <h2>What it does</h2>
       <div class="grid">
-        <div class="card"><h3>Dictate anywhere</h3><p>Hold <kbd>Ctrl+Win</kbd>, talk, and let go. Clean text, with the "ums" taken out, appears wherever your cursor is: email, chat, documents or any app.</p></div>
-        <div class="card"><h3>Write replies for you</h3><p>Hold <kbd>Ctrl+Win+Alt</kbd> and say what you mean, however rough. wisperChad reads the message on your screen and drafts a polite reply. You read it and press Send yourself.</p></div>
+        <div class="card"><h3>Dictate anywhere</h3><p>Hold <kbd>Ctrl+Win</kbd> on Windows or <kbd>Ctrl+Option+D</kbd> on Mac, talk, and let go. Clean text, with the "ums" taken out, appears wherever your cursor is.</p></div>
+        <div class="card"><h3>Write replies for you</h3><p>Hold <kbd>Ctrl+Win+Alt</kbd> or <kbd>Ctrl+Option+R</kbd> and say what you mean, however rough. wisperChad reads the message on your screen and drafts a reply. You read it and press Send yourself.</p></div>
         <div class="card"><h3>Private by design</h3><p>Your voice and your messages never leave your computer. Speech and writing models run locally, with no account and nothing sent to the cloud.</p></div>
-        <div class="card"><h3>Made for your computer</h3><p>Setup checks your PC and picks models that fit, from fast speech models like Parakeet to writing models like Qwen3.5. Older PCs get a dictation-only option.</p></div>
+        <div class="card"><h3>Made for your computer</h3><p>Setup checks your computer and picks models that fit, from fast speech models like Parakeet to writing models like Qwen3.5. Older computers get a dictation-only option.</p></div>
       </div>
     </section>
 
     <section id="download">
       <h2>Download</h2>
-      <p class="fine">wisperChad is free. Download the latest version, open the installer, and setup takes care of the rest.</p>
-      <ol class="steps">
-        <li>Download <b>wisperChad_x.y.z_x64-setup.exe</b> from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>.</li>
-        <li>Open it. Windows may say the publisher is unknown, because the app isn't code-signed yet: click <b>More info</b>, then <b>Run anyway</b>.</li>
-        <li>wisperChad checks your computer, recommends models, downloads them and has you try it out.</li>
-      </ol>
-      <p class="small">Needs Windows 10 or 11. Dictation alone runs on most PCs. Writing replies works best with 6 GB of RAM or more. A Mac version is in testing.</p>
+      <p class="fine">wisperChad is free. Get the installer for your computer from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>, and setup takes care of the rest.</p>
+      <div class="grid">
+        <div class="card" id="download-windows">
+          <h3>Windows 10 and 11</h3>
+          <ol class="steps">
+            <li>Download <b>wisperChad_x.y.z_x64-setup.exe</b> from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>.</li>
+            <li>Open it. Windows may say the publisher is unknown, because the app isn't code-signed yet: click <b>More info</b>, then <b>Run anyway</b>.</li>
+            <li>Setup checks your computer, downloads the right models and has you try it out.</li>
+          </ol>
+        </div>
+        <div class="card" id="download-mac">
+          <h3>Mac with an Apple chip (M1 or newer)</h3>
+          <ol class="steps">
+            <li>Download <b>wisperChad_x.y.z_aarch64.dmg</b> from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>, and drag wisperChad into Applications. Needs macOS 13.3 or newer.</li>
+            <li>The first time, macOS blocks it because it isn't notarized yet. Go to <b>System Settings → Privacy &amp; Security</b> and click <b>Open Anyway</b>. If macOS says the app is damaged, run <code>xattr -dr com.apple.quarantine /Applications/wisperChad.app</code> in Terminal.</li>
+            <li>Allow <b>Microphone</b>, <b>Accessibility</b> (to type for you) and <b>Screen Recording</b> (to read the message you're replying to).</li>
+          </ol>
+        </div>
+      </div>
+      <p class="small" style="margin-top: 18px">Dictation alone runs on most computers. Writing replies works best with 6 GB of memory or more.</p>
     </section>
 
     <section id="support">
@@ -112,5 +236,77 @@
       © 2026 Phua Si En. wisperChad is an independent project and isn't affiliated with Wispr, OpenAI or any model provider.
     </footer>
   </div>
+
+  <script>
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const smooth = (x) => { const t = Math.min(1, Math.max(0, x)); return t * t * (3 - 2 * t); };
+
+    // Mac visitors see the Mac download first.
+    if (/Mac/.test(navigator.platform || navigator.userAgent)) {
+      document.querySelector("#get-mac").classList.add("primary");
+      document.querySelector("#get-windows").classList.remove("primary");
+    }
+
+    // The band: purple and talking while it crosses the screen, then white and still as it scrolls away.
+    const band = document.querySelector("#band");
+    const waves = document.querySelector("#waves");
+    const count = innerWidth < 600 ? 25 : 41;
+    const bars = Array.from({ length: count }, () => waves.appendChild(document.createElement("span")));
+    let visible = false;
+    function drawBand(now) {
+      const box = band.getBoundingClientRect();
+      const passed = (innerHeight - box.top) / (innerHeight + box.height); // 0 entering, 1 gone
+      const talking = calm ? 0 : 1 - smooth((passed - 0.55) / 0.3);
+      const t = now / 1000;
+      const middle = (count - 1) / 2;
+      bars.forEach((bar, i) => {
+        const away = Math.abs(i - middle) / middle;
+        const shape = 0.25 + 0.75 * Math.cos(away * Math.PI / 2);
+        const wave = 0.5 + 0.3 * Math.sin(t * 5.1 - away * 6) + 0.2 * Math.sin(t * 8.3 + i * 1.7);
+        const height = 16 + shape * 140 * (0.35 + 0.65 * talking * wave);
+        bar.style.height = `${Math.round(innerWidth < 600 ? height * 0.75 : height)}px`;
+        const mix = (from, to) => Math.round(from + (to - from) * talking);
+        bar.style.background = `rgb(${mix(255, 153)}, ${mix(255, 78)}, ${mix(255, 168)})`;
+      });
+      if (visible && !calm) requestAnimationFrame(drawBand);
+    }
+    new IntersectionObserver(([entry]) => {
+      const was = visible;
+      visible = entry.isIntersecting;
+      if (visible && !was) requestAnimationFrame(drawBand);
+    }).observe(band);
+    drawBand(0);
+
+    // The examples: a short listen, then the text types itself out, the first time each comes into view.
+    function play(block) {
+      const box = block.querySelector(".typed");
+      const text = box.dataset.text;
+      clearTimeout(block.timer);
+      box.textContent = "";
+      if (calm) { box.textContent = text; return; }
+      block.classList.add("listening");
+      block.timer = setTimeout(function type(i = 0) {
+        block.classList.remove("listening");
+        box.innerHTML = "";
+        box.append(document.createTextNode(text.slice(0, i)));
+        if (i < text.length) {
+          const caret = document.createElement("span");
+          caret.className = "caret";
+          box.append(caret);
+          block.timer = setTimeout(() => type(i + 2), 22);
+        }
+      }, 1600);
+    }
+    const blocks = document.querySelectorAll(".demo-block");
+    const watcher = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        play(entry.target);
+        watcher.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    blocks.forEach((block) => watcher.observe(block));
+    document.querySelector("#replay").addEventListener("click", () => blocks.forEach(play));
+  </script>
 </body>
 </html>
