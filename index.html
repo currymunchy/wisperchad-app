@@ -12,11 +12,11 @@
   <style>
     :root {
       --bg: #fffefd; --soft: #f5f3f0; --text: #1a1a1a; --muted: #6f6b67; --border: #e5e2de;
-      --accent: #994ea8; --accent-soft: #f5ecf7; --ink: #111116; --window: #ffffff;
+      --accent: #994ea8; --accent-soft: #f5ecf7; --ink: #111116; --window: #ffffff; --accent-on-dark: #cf9adb;
       --serif: Georgia, "Times New Roman", serif; --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
     @media (prefers-color-scheme: dark) {
-      :root { --bg: #1a1a1a; --soft: #232323; --text: #fffefd; --muted: #a8a4a0; --border: #383838; --accent: #cf9adb; --accent-soft: #33243a; --window: #222222; }
+      :root { --bg: #1a1a1a; --soft: #232323; --text: #fffefd; --muted: #a8a4a0; --border: #383838; --accent: #cf9adb; --accent-soft: #33243a; --window: #222222; --accent-on-dark: #994ea8; }
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -37,7 +37,10 @@
     .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn { display: inline-block; padding: 14px 26px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--text); color: var(--text); background: none; font-size: 16px; cursor: pointer; }
     .btn.primary { background: var(--text); color: var(--bg); }
-    .btn:hover { opacity: 0.85; }
+    /* The wording turns the theme's purple on hover, in the shade that reads on each button. */
+    .btn { transition: color 0.15s; }
+    .btn:hover { color: var(--accent); }
+    .btn.primary:hover { color: var(--accent-on-dark); }
     .small { font-size: 14px; color: var(--muted); }
     section { padding: 64px 0; border-top: 1px solid var(--border); }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 28px; }
