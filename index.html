@@ -52,12 +52,14 @@
     code { font: 13px/1.5 ui-monospace, Consolas, monospace; background: var(--soft); padding: 2px 6px; border-radius: 6px; overflow-wrap: anywhere; }
     footer { padding: 36px 0 56px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
 
-    /* The talking pill: the logo's waves in the shape of the app's listening bar. Purple while they
-       talk, white as they settle. */
-    .band { text-align: center; padding: 8px 0 72px; }
-    .pill-big { width: min(560px, 100%); height: 150px; margin: 0 auto; border-radius: 999px; background: var(--ink); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .waves { display: flex; align-items: center; justify-content: center; gap: 6px; height: 120px; }
-    .waves span { width: 8px; border-radius: 8px; background: #fff; height: 16px; }
+    /* The listening bar from the app, with the logo listening: its waves talk in purple, then settle
+       to white when it's done, over and over. */
+    .band { text-align: center; padding: 64px 0 72px; border-top: 1px solid var(--border); }
+    .listen-pill { display: inline-flex; align-items: center; gap: 18px; padding: 14px 34px 14px 14px; border-radius: 999px;
+      background: var(--window); color: var(--text); border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      font: 600 26px var(--sans); }
+    .listen-logo { width: 84px; height: 84px; flex: none; }
+    #listen-text { min-width: 7.2em; text-align: left; }
     .band p { font: 400 30px/1.2 var(--serif); margin: 30px 0 0; letter-spacing: -0.01em; }
     .band .small { margin-top: 6px; font-size: 15px; }
 
@@ -93,7 +95,7 @@
     @media (max-width: 600px) {
       h1 { font-size: 46px; } h2 { font-size: 32px; } nav { display: none; }
       .hero { padding-top: 28px; } .hero img { width: 120px; height: 120px; }
-      .pill-big { height: 110px; } .waves { gap: 4px; height: 90px; } .waves span { width: 6px; }
+      .listen-pill { gap: 12px; padding: 10px 24px 10px 10px; font-size: 20px; } .listen-logo { width: 60px; height: 60px; }
       .band p { font-size: 24px; }
     }
   </style>
@@ -115,6 +117,18 @@
       </div>
       <p class="small">Free. No account, no subscription, no cloud.</p>
     </div>
+
+
+
+
+    <section id="features">
+      <h2>What it does</h2>
+      <div class="grid">
+        <div class="card"><h3>Dictate anywhere</h3><p>Hold <kbd>Ctrl+Win</kbd> on Windows or <kbd>Ctrl+Option+D</kbd> on Mac, talk, and let go. Clean text, with the "ums" taken out, appears wherever your cursor is.</p></div>
+        <div class="card"><h3>Write replies for you</h3><p>Hold <kbd>Ctrl+Win+Alt</kbd> or <kbd>Ctrl+Option+R</kbd> and say what you mean, however rough. wisperChad reads the message on your screen and drafts a reply. You read it and press Send yourself.</p></div>
+        <div class="card"><h3>Private by design</h3><p>Your voice and your messages never leave your computer. Speech and writing models run locally, with no account and nothing sent to the cloud.</p></div>
+      </div>
+    </section>
 
     <section id="examples">
       <h2>See it in action</h2>
@@ -174,21 +188,6 @@
       </div>
     </section>
 
-    <div class="band" id="band">
-      <div class="pill-big" aria-hidden="true"><div class="waves" id="waves"></div></div>
-      <p>Just talk. wisperChad listens.</p>
-      <div class="small">Speech and writing models run on your computer. Nothing leaves it.</div>
-    </div>
-
-    <section id="features">
-      <h2>What it does</h2>
-      <div class="grid">
-        <div class="card"><h3>Dictate anywhere</h3><p>Hold <kbd>Ctrl+Win</kbd> on Windows or <kbd>Ctrl+Option+D</kbd> on Mac, talk, and let go. Clean text, with the "ums" taken out, appears wherever your cursor is.</p></div>
-        <div class="card"><h3>Write replies for you</h3><p>Hold <kbd>Ctrl+Win+Alt</kbd> or <kbd>Ctrl+Option+R</kbd> and say what you mean, however rough. wisperChad reads the message on your screen and drafts a reply. You read it and press Send yourself.</p></div>
-        <div class="card"><h3>Private by design</h3><p>Your voice and your messages never leave your computer. Speech and writing models run locally, with no account and nothing sent to the cloud.</p></div>
-      </div>
-    </section>
-
     <section id="download">
       <h2>Download</h2>
       <p class="fine">wisperChad is free. Get the installer for your computer from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>, and setup takes care of the rest.</p>
@@ -229,6 +228,25 @@
       <p><b>Contact.</b> Message me through <a href="https://github.com/currymunchy">GitHub</a>.</p>
     </section>
 
+    <div class="band" id="band">
+      <div class="listen-pill" aria-hidden="true">
+        <svg class="listen-logo" viewBox="0 0 1024 1024">
+          <rect x="40" y="40" width="944" height="944" rx="232" fill="#111116" />
+          <path d="M306 300 L416 366 C478 352 546 352 608 366 L718 300 C732 292 744 300 744 316 L756 560 C760 690 646 770 512 770 C378 770 264 690 268 560 L280 316 C280 300 292 292 306 300 Z" fill="none" stroke="#ffffff" stroke-width="48.33" stroke-linejoin="round" transform="translate(512 512) scale(1.2) translate(-512 -531)" />
+          <g id="logo-waves" fill="#ffffff">
+            <rect x="334" y="546" width="44" height="80" rx="22" />
+            <rect x="412" y="498" width="44" height="176" rx="22" />
+            <rect x="490" y="461" width="44" height="250" rx="22" />
+            <rect x="568" y="498" width="44" height="176" rx="22" />
+            <rect x="646" y="546" width="44" height="80" rx="22" />
+          </g>
+        </svg>
+        <span id="listen-text">Listening…</span>
+      </div>
+      <p>Just talk. wisperChad listens.</p>
+      <div class="small">Speech and writing models run on your computer. Nothing leaves it.</div>
+    </div>
+
     <footer>
       © 2026 Phua Si En. wisperChad is an independent project and isn't affiliated with Wispr, OpenAI or any model provider.
     </footer>
@@ -244,27 +262,29 @@
       document.querySelector("#get-windows").classList.remove("primary");
     }
 
-    // The band: purple and talking while it crosses the screen, then white and still as it scrolls away.
+    // The listening logo: the same motion as the animated logo. White and still, then purple and
+    // talking for about two seconds, then it settles back to white with "Done", every four seconds.
     const band = document.querySelector("#band");
-    const waves = document.querySelector("#waves");
-    const count = innerWidth < 600 ? 21 : 33;
-    const bars = Array.from({ length: count }, () => waves.appendChild(document.createElement("span")));
+    const logoWaves = [...document.querySelectorAll("#logo-waves rect")];
+    const label = document.querySelector("#listen-text");
+    const HEIGHTS = [80, 176, 250, 176, 80], SWING = [0.8, 0.5, 0.38, 0.5, 0.8], TALLEST = [150, 270, 340, 270, 150];
+    const level = (t) => smooth((t - 0.5) / 0.45) * (1 - smooth((t - 2.85) / 0.6));
     let visible = false;
     function drawBand(now) {
-      const box = band.getBoundingClientRect();
-      const passed = (innerHeight - box.top) / (innerHeight + box.height); // 0 entering, 1 gone
-      const talking = calm ? 0 : 1 - smooth((passed - 0.55) / 0.3);
-      const t = now / 1000;
-      const middle = (count - 1) / 2;
-      bars.forEach((bar, i) => {
-        const away = Math.abs(i - middle) / middle;
-        const shape = 0.25 + 0.75 * Math.cos(away * Math.PI / 2);
-        const wave = 0.5 + 0.3 * Math.sin(t * 5.1 - away * 6) + 0.2 * Math.sin(t * 8.3 + i * 1.7);
-        const height = 14 + shape * 96 * (0.35 + 0.65 * talking * wave);
-        bar.style.height = `${Math.round(innerWidth < 600 ? height * 0.75 : height)}px`;
-        const mix = (from, to) => Math.round(from + (to - from) * talking);
-        bar.style.background = `rgb(${mix(255, 153)}, ${mix(255, 78)}, ${mix(255, 168)})`;
+      const t = calm ? 1.5 : (now / 1000) % 4;
+      const turn = 2 * Math.PI;
+      logoWaves.forEach((bar, i) => {
+        const away = Math.abs(i - 2);
+        const amount = calm ? 1 : level(t - away * 0.06);
+        const wave = 0.55 * Math.sin(turn * (1.9 * t - 0.22 * away)) + 0.3 * Math.sin(turn * (3.1 * t - 0.37 * away) + 1.1)
+          + 0.15 * Math.sin(turn * (5.3 * t - 0.5 * away) + 2.3);
+        const height = Math.min(TALLEST[i], Math.max(44, HEIGHTS[i] * (1 + (calm ? 0 : amount) * SWING[i] * wave)));
+        bar.setAttribute("height", height.toFixed(1));
+        bar.setAttribute("y", (586 - height / 2).toFixed(1));
+        const mix = (from, to) => Math.round(from + (to - from) * amount);
+        bar.setAttribute("fill", `rgb(${mix(255, 153)}, ${mix(255, 78)}, ${mix(255, 168)})`);
       });
+      label.textContent = t > 3.2 ? "Done ✓" : "Listening…";
       if (visible && !calm) requestAnimationFrame(drawBand);
     }
     new IntersectionObserver(([entry]) => {
