@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>wisperChad: talk your type</title>
+  <meta name="description" content="Free, private voice dictation for Windows. Hold a hotkey, talk, and clean text appears wherever you type. It can draft your replies too. Everything runs on your own PC." />
+  <meta property="og:title" content="wisperChad: talk your type" />
+  <meta property="og:description" content="Free, private voice dictation for Windows that runs entirely on your own PC." />
+  <meta property="og:image" content="https://currymunchy.github.io/wisperchad-app/linkedin-banner-white.png" />
+  <link rel="icon" href="logo-black.png" />
+  <style>
+    :root {
+      --bg: #fffefd; --soft: #f5f3f0; --text: #1a1a1a; --muted: #6f6b67; --border: #e5e2de;
+      --accent: #994ea8; --accent-soft: #f5ecf7;
+      --serif: Georgia, "Times New Roman", serif; --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #1a1a1a; --soft: #232323; --text: #fffefd; --muted: #a8a4a0; --border: #383838; --accent: #cf9adb; --accent-soft: #33243a; }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--sans); }
+    a { color: var(--accent); }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font: 24px/1 var(--serif); color: var(--text); text-decoration: none; }
+    .brand img { width: 34px; height: 34px; }
+    nav a { color: var(--muted); text-decoration: none; margin-left: 22px; font-size: 15px; }
+    nav a:hover { color: var(--text); }
+    .hero { text-align: center; padding: 56px 0 72px; }
+    .hero img { width: 150px; height: 150px; }
+    h1 { font: 400 64px/1.05 var(--serif); letter-spacing: -0.02em; margin: 18px 0 16px; }
+    h2 { font: 400 38px/1.15 var(--serif); letter-spacing: -0.015em; margin: 0 0 14px; }
+    h3 { font-size: 17px; margin: 0 0 6px; }
+    .lead { color: var(--muted); font-size: 20px; max-width: 620px; margin: 0 auto 30px; }
+    .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 14px 26px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--text); color: var(--text); }
+    .btn.primary { background: var(--text); color: var(--bg); }
+    .btn:hover { opacity: 0.85; }
+    .small { font-size: 14px; color: var(--muted); }
+    section { padding: 64px 0; border-top: 1px solid var(--border); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 28px; }
+    .card { border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; }
+    .card p { margin: 0; color: var(--muted); }
+    kbd { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 10px; font: 600 14px var(--sans); }
+    ol.steps { padding-left: 22px; margin: 20px 0 0; }
+    ol.steps li { margin-bottom: 10px; }
+    .support { background: var(--soft); border-radius: 20px; padding: 36px; text-align: center; }
+    .support p { color: var(--muted); max-width: 560px; margin: 0 auto 22px; }
+    .fine p { color: var(--muted); }
+    footer { padding: 36px 0 56px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+    @media (max-width: 600px) { h1 { font-size: 46px; } nav { display: none; } .hero { padding-top: 28px; } .hero img { width: 120px; height: 120px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#"><img src="logo-black.png" alt="" />wisperChad</a>
+      <nav><a href="#features">Features</a><a href="#download">Download</a><a href="#support">Support</a><a href="#privacy">Privacy</a></nav>
+    </header>
+
+    <div class="hero">
+      <img src="logo-animated.svg" alt="The wisperChad logo: a cat with sound waves" />
+      <h1>Talk your type.</h1>
+      <p class="lead">Free, private voice dictation for Windows. Hold a hotkey, talk, and clean text appears wherever you type. It can even write your replies. Everything runs on your own PC.</p>
+      <div class="buttons">
+        <a class="btn primary" href="https://github.com/currymunchy/wisperchad-app/releases/latest">Download for Windows</a>
+        <a class="btn" href="#support">Support wisperChad</a>
+      </div>
+      <p class="small">Free. No account, no subscription, no cloud. Windows 10 and 11.</p>
+    </div>
+
+    <section id="features">
+      <h2>What it does</h2>
+      <div class="grid">
+        <div class="card"><h3>Dictate anywhere</h3><p>Hold <kbd>Ctrl+Win</kbd>, talk, and let go. Clean text, with the "ums" taken out, appears wherever your cursor is: email, chat, documents or any app.</p></div>
+        <div class="card"><h3>Write replies for you</h3><p>Hold <kbd>Ctrl+Win+Alt</kbd> and say what you mean, however rough. wisperChad reads the message on your screen and drafts a polite reply. You read it and press Send yourself.</p></div>
+        <div class="card"><h3>Private by design</h3><p>Your voice and your messages never leave your computer. Speech and writing models run locally, with no account and nothing sent to the cloud.</p></div>
+        <div class="card"><h3>Made for your computer</h3><p>Setup checks your PC and picks models that fit, from fast speech models like Parakeet to writing models like Qwen3.5. Older PCs get a dictation-only option.</p></div>
+      </div>
+    </section>
+
+    <section id="download">
+      <h2>Download</h2>
+      <p class="fine">wisperChad is free. Download the latest version, open the installer, and setup takes care of the rest.</p>
+      <ol class="steps">
+        <li>Download <b>wisperChad_x.y.z_x64-setup.exe</b> from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>.</li>
+        <li>Open it. Windows may say the publisher is unknown, because the app isn't code-signed yet: click <b>More info</b>, then <b>Run anyway</b>.</li>
+        <li>wisperChad checks your computer, recommends models, downloads them and has you try it out.</li>
+      </ol>
+      <p class="small">Needs Windows 10 or 11. Dictation alone runs on most PCs. Writing replies works best with 6 GB of RAM or more. A Mac version is in testing.</p>
+    </section>
+
+    <section id="support">
+      <div class="support">
+        <h2>Support wisperChad</h2>
+        <p>wisperChad is free and stays free. There's nothing to buy. If it saves you time, you can support its development with a one-time or monthly sponsorship through GitHub Sponsors. It helps pay for code signing and testing on more computers.</p>
+        <a class="btn primary" href="https://github.com/sponsors/currymunchy">Sponsor on GitHub</a>
+      </div>
+    </section>
+
+    <section id="privacy" class="fine">
+      <h2>Privacy and terms</h2>
+      <p><b>Your data.</b> wisperChad doesn't collect, store or send anything you say or type. Audio, transcripts and the text it reads on your screen are processed on your computer only. The app goes online only to download the AI models you choose, from their publishers on Hugging Face, and its writing engine from GitHub. It has no accounts, analytics or ads.</p>
+      <p><b>Sponsorships.</b> Sponsorships are optional and are handled by GitHub Sponsors, with payments processed by Stripe. They don't buy a product or service. If you sponsored by mistake, contact me and I'll help sort it out with GitHub.</p>
+      <p><b>License.</b> wisperChad is released under the MIT License and comes with no warranty. Each AI model keeps its publisher's license, listed in the app under About.</p>
+      <p><b>Contact.</b> Message me through <a href="https://github.com/currymunchy">GitHub</a>.</p>
+    </section>
+
+    <footer>
+      © 2026 Phua Si En. wisperChad is an independent project and isn't affiliated with Wispr, OpenAI or any model provider.
+    </footer>
+  </div>
+</body>
+</html>
