@@ -7,6 +7,6 @@ type. It can write your replies too, and everything runs on your own PC.
 
 **Download:** the latest installer is under [Releases](https://github.com/currymunchy/wisperchad-app/releases/latest).
 
-**Support:** wisperChad is free. If it saves you time, you can [sponsor it on GitHub](https://github.com/sponsors/currymunchy).
+**Support:** wisperChad is free. If it saves you time, you can [buy me a coffee](https://buymeacoffee.com/phuasien) or [sponsor it on GitHub](https://github.com/sponsors/currymunchy).
 
 Made by Phua Si En. MIT License.
