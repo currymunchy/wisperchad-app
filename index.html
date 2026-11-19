@@ -15,9 +15,6 @@
       --accent: #994ea8; --accent-soft: #f5ecf7; --ink: #111116; --window: #ffffff; --accent-on-dark: #cf9adb;
       --serif: Georgia, "Times New Roman", serif; --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #1a1a1a; --soft: #232323; --text: #fffefd; --muted: #a8a4a0; --border: #383838; --accent: #cf9adb; --accent-soft: #33243a; --window: #222222; --accent-on-dark: #994ea8; }
-    }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--sans); }
@@ -114,8 +111,8 @@
       <h1>Talk your type.</h1>
       <p class="lead">Free, private voice dictation for Windows and Mac. Hold a hotkey, talk, and clean text appears wherever you type. It can even write your replies. Everything runs on your own computer.</p>
       <div class="buttons">
-        <a class="btn primary" id="get-windows" href="#download-windows">Download for Windows</a>
-        <a class="btn" id="get-mac" href="#download-mac">Download for Mac</a>
+        <a class="btn primary" id="get-windows" href="https://github.com/currymunchy/wisperchad-app/releases/latest/download/wisperChad-Setup.exe">Download for Windows</a>
+        <a class="btn" id="get-mac" href="https://github.com/currymunchy/wisperchad-app/releases/latest/download/wisperChad.dmg">Download for Mac</a>
       </div>
       <p class="small">Free. No account, no subscription, no cloud.</p>
     </div>
@@ -192,12 +189,12 @@
 
     <section id="download">
       <h2>Download</h2>
-      <p class="fine">wisperChad is free. Get the installer for your computer from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>, and setup takes care of the rest.</p>
+      <p class="fine">wisperChad is free. Download it for your computer, open it, and setup takes care of the rest.</p>
       <div class="grid">
         <div class="card" id="download-windows">
           <h3>Windows 10 and 11</h3>
           <ol class="steps">
-            <li>Download <b>wisperChad_x.y.z_x64-setup.exe</b> from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>.</li>
+            <li><a href="https://github.com/currymunchy/wisperchad-app/releases/latest/download/wisperChad-Setup.exe">Download wisperChad for Windows</a>.</li>
             <li>Open it. Windows may say the publisher is unknown, because the app isn't code-signed yet: click <b>More info</b>, then <b>Run anyway</b>.</li>
             <li>Setup checks your computer, downloads the right models and has you try it out.</li>
           </ol>
@@ -205,7 +202,7 @@
         <div class="card" id="download-mac">
           <h3>Mac with an Apple chip (M1 or newer)</h3>
           <ol class="steps">
-            <li>Download <b>wisperChad_x.y.z_aarch64.dmg</b> from the <a href="https://github.com/currymunchy/wisperchad-app/releases/latest">latest release</a>, and drag wisperChad into Applications. Needs macOS 13.3 or newer.</li>
+            <li><a href="https://github.com/currymunchy/wisperchad-app/releases/latest/download/wisperChad.dmg">Download wisperChad for Mac</a>, open it and drag wisperChad into Applications. Needs macOS 13.3 or newer.</li>
             <li>The first time, macOS blocks it because it isn't notarized yet. Go to <b>System Settings → Privacy &amp; Security</b> and click <b>Open Anyway</b>. If macOS says the app is damaged, run <code>xattr -dr com.apple.quarantine /Applications/wisperChad.app</code> in Terminal.</li>
             <li>Allow <b>Microphone</b>, <b>Accessibility</b> (to type for you) and <b>Screen Recording</b> (to read the message you're replying to).</li>
           </ol>
